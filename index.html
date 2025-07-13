@@ -54,6 +54,11 @@
       border-color: #aef;
       opacity: 0.6;
     }
+    .materia[data-bloqueada="true"] {
+      pointer-events: none;
+      opacity: 0.3;
+      filter: grayscale(0.6);
+    }
     .detalle {
       font-size: 0.9rem;
       margin-top: 0.5rem;
@@ -65,7 +70,7 @@
   <h1>Malla Interactiva – Diseño Multimedial</h1>
   <div id="contenedor"></div>
   <script>
- const malla = {
+    const malla = {
       "1° Año": [
         { nombre: "Introducción a la programación para medios interactivos", detalle: "64 hs – Cuatrimestral" },
         { nombre: "Programación para medios interactivos orientada a las tecnologías web", detalle: "64 hs – Cuatrimestral", correlativas: ["Introducción a la programación para medios interactivos"] },
@@ -114,29 +119,47 @@
         { nombre: "Historia de los medios y sistemas de comunicación contemporáneos", detalle: "128 hs – Anual", correlativas: ["Producción de textos", "Lenguaje de los nuevos medios", "Taller de diseño de experiencias transmedia"] }
       ]
     };
+
     const contenedor = document.getElementById("contenedor");
     const progreso = JSON.parse(localStorage.getItem("malla-aprobadas") || "{}");
+
+    function estaHabilitada(materia) {
+      if (!materia.correlativas) return true;
+      return materia.correlativas.every(correlativa => progreso[correlativa]);
+    }
+
     for (let anio in malla) {
       const bloque = document.createElement("div");
       bloque.className = "anio";
       bloque.innerHTML = `<h2>${anio}</h2><div class="materias"></div>`;
       const zonaMaterias = bloque.querySelector(".materias");
+
       malla[anio].forEach((materia) => {
+        const aprobada = progreso[materia.nombre] || false;
+        const habilitada = estaHabilitada(materia);
+
         const card = document.createElement("div");
         card.className = "materia";
         card.textContent = materia.nombre;
         card.setAttribute("data-nombre", materia.nombre);
-        card.setAttribute("data-aprobada", progreso[materia.nombre] || false);
+        card.setAttribute("data-aprobada", aprobada);
+        card.setAttribute("data-bloqueada", !habilitada);
+
         const info = document.createElement("div");
         info.className = "detalle";
         info.textContent = materia.detalle;
         card.appendChild(info);
-        card.addEventListener("click", () => {
-          const estado = card.getAttribute("data-aprobada") === "true";
-          card.setAttribute("data-aprobada", !estado);
-          progreso[materia.nombre] = !estado;
-          localStorage.setItem("malla-aprobadas", JSON.stringify(progreso));
-        });
+
+        if (habilitada) {
+          card.addEventListener("click", () => {
+            const nuevoEstado = !(card.getAttribute("data-aprobada") === "true");
+            card.setAttribute("data-aprobada", nuevoEstado);
+            progreso[materia.nombre] = nuevoEstado;
+            localStorage.setItem("malla-aprobadas", JSON.stringify(progreso));
+            location.reload();
+          });
+        }
+
         zonaMaterias.appendChild(card);
       });
       contenedor.appendChild(bloque);
@@ -144,3 +167,4 @@
   </script>
 </body>
 </html>
+ 
