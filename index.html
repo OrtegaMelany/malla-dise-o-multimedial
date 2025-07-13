@@ -65,22 +65,55 @@
   <h1>Malla Interactiva – Diseño Multimedial</h1>
   <div id="contenedor"></div>
   <script>
-    const malla = {
-      "1° Año": [
-        { nombre: "Introducción a la programación", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Taller de diseño digital", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Introducción a la imagen digital", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Introducción a los medios digitales", detalle: "128 hs – Anual" },
-        { nombre: "Lenguaje visual 1", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Narrativas transmedia", detalle: "64 hs – Cuatrimestral" }
-      ],
-      "2° Año": [
-        { nombre: "Computación gráfica y sistemas generativos", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Taller de diseño web", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Narrativas interactivas", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Historia, política y cultura contemporáneas", detalle: "128 hs – Anual" }
-      ]
-    };
+const malla = {
+  "1° Año": [
+    { nombre: "Introducción a la programación para medios interactivos", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Programación para medios interactivos orientada a las tecnologías web", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Taller de diseño digital", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Taller de diseño de experiencias interactivas", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Introducción a la imagen digital", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Introducción a narrativas transmedia", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Introducción a los medios digitales", detalle: "48 hs – Cuatrimestral" },
+    { nombre: "Lenguaje visual 1", detalle: "128 hs – Anual" }
+  ],
+
+  "2° Año": [
+    { nombre: "Computación gráfica aplicada y sistemas generativos", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Entornos virtuales e introducción a la simulación y los videojuegos", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Taller de diseño para la web", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Taller de diseño de información", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Lenguaje de las narrativas interactivas", detalle: "128 hs – Anual" },
+    { nombre: "Historia, política y cultura contemporáneas", detalle: "128 hs – Anual" }
+  ],
+
+  "3° Año": [
+    { nombre: "Técnicas y lenguaje sonoro", detalle: "96 hs – Cuatrimestral" },
+    { nombre: "Técnicas de realización sonora", detalle: "96 hs – Cuatrimestral" },
+    { nombre: "Taller de diseño de narrativas multisensoriales", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Taller de diseño de experiencias transmedia", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Lenguaje de los nuevos medios", detalle: "128 hs – Anual" },
+    { nombre: "Animación multimedial 2D", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Formulación y evaluación de proyectos", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Gestión de proyectos", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Producción de textos", detalle: "96 hs – Anual" }
+  ],
+
+  "4° Año": [
+    { nombre: "Técnicas y lenguaje audiovisual", detalle: "96 hs – Cuatrimestral" },
+    { nombre: "Técnicas de realización audiovisual", detalle: "96 hs – Cuatrimestral" },
+    { nombre: "Taller de diseño multimedial", detalle: "64 hs – Anual" },
+    { nombre: "Poéticas tecnológicas y diseño interactivo", detalle: "64 hs – Anual" },
+    { nombre: "Animación multimedial 3D", detalle: "64 hs – Cuatrimestral" },
+    { nombre: "Teoría del arte", detalle: "128 hs – Anual" },
+    { nombre: "Metodología de la investigación", detalle: "64 hs – Cuatrimestral" }
+  ],
+
+  "5° Año": [
+    { nombre: "Fundamentos y aplicaciones de tecnología electrónica", detalle: "96 hs – Cuatrimestral" },
+    { nombre: "Taller de producción final", detalle: "192 hs – Anual" },
+    { nombre: "Historia de los medios y sistemas de comunicación contemporáneos", detalle: "128 hs – Anual" }
+  ]
+};
     const contenedor = document.getElementById("contenedor");
     const progreso = JSON.parse(localStorage.getItem("malla-aprobadas") || "{}");
     for (let anio in malla) {
