@@ -13,31 +13,26 @@
       color: white;
       overflow-x: hidden;
     }
-
     h1 {
       text-align: center;
       padding: 1rem;
       font-size: 2.5rem;
       backdrop-filter: blur(10px);
     }
-
     .anio {
       margin: 2rem;
     }
-
     .anio h2 {
       font-size: 2rem;
       border-bottom: 2px solid rgba(255,255,255,0.3);
       padding-bottom: 0.5rem;
     }
-
     .materias {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
       margin-top: 1rem;
     }
-
     .materia {
       background: rgba(255, 255, 255, 0.15);
       border: 1px solid rgba(255,255,255,0.3);
@@ -49,19 +44,16 @@
       position: relative;
       cursor: pointer;
     }
-
     .materia:hover {
       transform: scale(1.02);
       box-shadow: 0 0 10px rgba(255,255,255,0.5);
     }
-
     .materia[data-aprobada="true"] {
       background: rgba(255, 255, 255, 0.05);
       text-decoration: line-through;
       border-color: #aef;
       opacity: 0.6;
     }
-
     .detalle {
       font-size: 0.9rem;
       margin-top: 0.5rem;
@@ -72,86 +64,46 @@
 <body>
   <h1>Malla Interactiva – Diseño Multimedial</h1>
   <div id="contenedor"></div>
-
   <script>
     const malla = {
       "1° Año": [
-        { nombre: "Introducción a la programación para medios interactivos", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Programacion para medios interactivos orientada a las tecnologias web", detalle: "64 hs – Cuatrimestral" },
+        { nombre: "Introducción a la programación", detalle: "64 hs – Cuatrimestral" },
         { nombre: "Taller de diseño digital", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Taller de diseño de experiencias interactivas", detalle: "64 hs – Cuatrimestral" },
         { nombre: "Introducción a la imagen digital", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Introduccion a narrativas transmedia", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Introducción a los medios digitales", detalle: "48 hs – Cuatrimestral" },
-        { nombre: "Lenguaje visual 1", detalle: "128 hs – Anuall" }
-  ],
-    
+        { nombre: "Introducción a los medios digitales", detalle: "128 hs – Anual" },
+        { nombre: "Lenguaje visual 1", detalle: "64 hs – Cuatrimestral" },
+        { nombre: "Narrativas transmedia", detalle: "64 hs – Cuatrimestral" }
+      ],
       "2° Año": [
-        { nombre: "Computación gráfica aplicada y sistemas generativos", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Entornos virtuales e introduccion a la simulacion y los videojuegos", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Taller de diseño para la web", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Taller de diseño de informacion", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Lenguaje de las narrativas interactivas", detalle: " 128 hs – Anual" }
+        { nombre: "Computación gráfica y sistemas generativos", detalle: "64 hs – Cuatrimestral" },
+        { nombre: "Taller de diseño web", detalle: "64 hs – Cuatrimestral" },
+        { nombre: "Narrativas interactivas", detalle: "64 hs – Cuatrimestral" },
         { nombre: "Historia, política y cultura contemporáneas", detalle: "128 hs – Anual" }
-      ],
-      
-       "3° Año": [
-        { nombre: "Tecnicas y lenguaje sonoro", detalle: "96 hs – Cuatrimestral" },
-        { nombre: "Tecnicas de realizacion sonora", detalle: "96 hs – Cuatrimestral" },
-        { nombre: "Taller de diseño de narrativas multisensoriales", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Taller de diseño de experiencias transmedia", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Lemguaje de los nuevos medios", detalle: "128 hs – Anual" },
-        { nombre: "Animacion multimedial 2D", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Formulacion y evaluacion de proyectos", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Gestion de proyectos", detalle: "64 hs – Cuatrimestral" },
-        { nombre: "Produccion de textos", detalle: "96 hs – Anual" }
-      ],
-      
-       "4° Año": [
-        { nombre: "Tecnicas y lenguaje audiovisual", detalle: "96 hs – Cuatrimestral" },
-        { nombre: "Tecnicas y de realizacion audiovisual", detalle: "96 hs – Cuatrimestral" }
-        { nombre: "Taller de diseño multimedial", detalle: "64 hs – Anual" }
-        { nombre: "Poeticas tecnologicas y diseño interactivo", detalle: "64 hs – Anual" }
-        { nombre: "Animacion multimedial 3D", detalle: "64 hs – Cuatrimestral" }
-        { nombre: "Teoria del arte", detalle: "128 hs – Anual" }
-        { nombre: "Metodologia de la investigacion", detalle: "64 hs – Cuatrimestral" }
-      ],
-      
-       "5° Año": [
-        { nombre: "Fundamentos y aplicaciones de tecnologia electronica", detalle: "96 hs – Cuatrimestral" },
-        { nombre: "Taller de produccion final", detalle: "192 hs – Anual" }
-        { nombre: "Historia de los medios y sistemas de comunicacion contemporáneos", detalle: "128 hs – Anual" }
       ]
     };
-
     const contenedor = document.getElementById("contenedor");
     const progreso = JSON.parse(localStorage.getItem("malla-aprobadas") || "{}");
-
     for (let anio in malla) {
       const bloque = document.createElement("div");
       bloque.className = "anio";
       bloque.innerHTML = `<h2>${anio}</h2><div class="materias"></div>`;
       const zonaMaterias = bloque.querySelector(".materias");
-
       malla[anio].forEach((materia) => {
         const card = document.createElement("div");
         card.className = "materia";
         card.textContent = materia.nombre;
         card.setAttribute("data-nombre", materia.nombre);
         card.setAttribute("data-aprobada", progreso[materia.nombre] || false);
-
         const info = document.createElement("div");
         info.className = "detalle";
         info.textContent = materia.detalle;
         card.appendChild(info);
-
         card.addEventListener("click", () => {
           const estado = card.getAttribute("data-aprobada") === "true";
           card.setAttribute("data-aprobada", !estado);
           progreso[materia.nombre] = !estado;
           localStorage.setItem("malla-aprobadas", JSON.stringify(progreso));
         });
-
         zonaMaterias.appendChild(card);
       });
       contenedor.appendChild(bloque);
